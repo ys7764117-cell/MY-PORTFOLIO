@@ -1,6 +1,8 @@
+```css
 /* =========================================================
    YASER SAYED PORTFOLIO
    RESPONSIVE PREMIUM DARK / BLUE / TEAL THEME
+   MOBILE 3D IMAGE FIXED
 ========================================================= */
 
 * {
@@ -589,7 +591,15 @@ button {
 
     align-items: center;
     justify-content: center;
+
+    /* IMPORTANT */
+    overflow: visible;
 }
+
+
+/* =========================================================
+   PROFILE CARD
+========================================================= */
 
 .profile-card {
     position: relative;
@@ -620,11 +630,18 @@ button {
         0 0 70px rgba(0,217,192,0.08);
 
     transition: 0.5s;
+
+    z-index: 2;
 }
 
 .profile-card:hover {
     transform: rotate(0deg) translateY(-8px);
 }
+
+
+/* =========================================================
+   CARD TOP
+========================================================= */
 
 .card-top {
     height: 40px;
@@ -638,6 +655,10 @@ button {
     padding: 0 15px;
 
     border-bottom: 1px solid rgba(255,255,255,0.08);
+
+    position: relative;
+
+    z-index: 3;
 }
 
 .card-top span {
@@ -649,6 +670,12 @@ button {
     background: #53606d;
 }
 
+
+/* =========================================================
+   PROFILE IMAGE WRAPPER
+   FIXED FOR 3D / FULL BODY IMAGE
+========================================================= */
+
 .profile-image-wrapper {
     height: calc(100% - 85px);
 
@@ -658,16 +685,54 @@ button {
     justify-content: center;
 
     overflow: hidden;
+
+    position: relative;
+
+    /* Don't crop the image */
+    padding: 8px;
 }
+
+
+/* =========================================================
+   PROFILE IMAGE
+========================================================= */
 
 .profile-image {
     width: 100%;
     height: 100%;
 
-    object-fit: cover;
+    /*
+       IMPORTANT FIX:
+       cover was cropping the 3D image on mobile.
+       contain keeps the complete image visible.
+    */
+    object-fit: contain;
+
+    object-position: center center;
+
+    max-width: 100%;
+    max-height: 100%;
 
     filter: saturate(0.9);
+
+    transform: scale(1);
+
+    transition: transform 0.4s ease;
+
+    /*
+       Prevent image from getting squeezed.
+    */
+    flex-shrink: 0;
 }
+
+.profile-card:hover .profile-image {
+    transform: scale(1.02);
+}
+
+
+/* =========================================================
+   PROFILE BOTTOM
+========================================================= */
 
 .profile-bottom {
     height: 45px;
@@ -685,11 +750,20 @@ button {
     font-size: 9px;
 
     letter-spacing: 2px;
+
+    position: relative;
+
+    z-index: 3;
 }
 
 .profile-bottom span:first-child {
     color: var(--primary);
 }
+
+
+/* =========================================================
+   VISUAL RINGS
+========================================================= */
 
 .visual-ring {
     position: absolute;
@@ -699,6 +773,8 @@ button {
     border-radius: 50%;
 
     pointer-events: none;
+
+    z-index: 1;
 }
 
 .ring-one {
@@ -714,6 +790,11 @@ button {
 
     border-color: rgba(22,140,255,0.13);
 }
+
+
+/* =========================================================
+   TECH BADGES
+========================================================= */
 
 .tech-badge {
     position: absolute;
@@ -1640,7 +1721,6 @@ footer {
     .project-visual {
         display: none;
     }
-
 }
 
 
@@ -1694,7 +1774,11 @@ footer {
     }
 
     .profile-card {
-        width: min(300px, 75%);
+        width: min(310px, 78%);
+    }
+
+    .profile-image-wrapper {
+        padding: 10px;
     }
 
     .badge-react {
@@ -1712,7 +1796,6 @@ footer {
     .contact-box {
         gap: 40px;
     }
-
 }
 
 
@@ -1722,8 +1805,6 @@ footer {
 ========================================================= */
 
 @media (max-width: 768px) {
-
-    /* GLOBAL */
 
     html,
     body {
@@ -1739,7 +1820,9 @@ footer {
     }
 
 
-    /* NAVBAR */
+    /* =====================================================
+       NAVBAR
+    ===================================================== */
 
     .nav-container {
         width: calc(100% - 28px);
@@ -1816,7 +1899,9 @@ footer {
     }
 
 
-    /* HERO */
+    /* =====================================================
+       HERO
+    ===================================================== */
 
     .hero {
         min-height: auto;
@@ -1825,7 +1910,7 @@ footer {
 
         flex-direction: column;
 
-        gap: 35px;
+        gap: 30px;
 
         padding-top: 115px;
 
@@ -1897,38 +1982,147 @@ footer {
     }
 
 
-    /* HERO IMAGE */
+    /* =====================================================
+       HERO 3D IMAGE - MOBILE FIX
+    ===================================================== */
 
     .hero-visual {
         width: 100%;
 
-        min-height: 430px;
+        /*
+           Increased height so the complete image has
+           enough vertical space.
+        */
+        min-height: 470px;
 
         margin-top: 5px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        /*
+           VERY IMPORTANT:
+           Don't clip badges/image from parent.
+        */
+        overflow: visible;
+
+        isolation: isolate;
     }
 
     .profile-card {
-        width: min(285px, 70vw);
+        /*
+           Bigger card on mobile.
+           This gives the 3D image more room.
+        */
+        width: min(310px, 76vw);
+
+        /*
+           Slightly taller card.
+        */
+        aspect-ratio: 310 / 470;
 
         border-radius: 21px;
+
+        transform: rotate(2deg);
+
+        /*
+           Keep card above rings.
+        */
+        z-index: 2;
     }
 
     .profile-card:hover {
         transform: rotate(0deg);
     }
 
+
+    /*
+       MOBILE IMAGE WRAPPER
+    */
+
+    .profile-image-wrapper {
+        height: calc(100% - 78px);
+
+        width: 100%;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        overflow: hidden;
+
+        padding: 8px 10px;
+    }
+
+
+    /*
+       MOBILE 3D IMAGE
+
+       contain = FULL IMAGE VISIBLE
+       cover  = image gets cropped
+    */
+
+    .profile-image {
+        width: 100%;
+        height: 100%;
+
+        object-fit: contain;
+
+        object-position: center center;
+
+        max-width: 100%;
+        max-height: 100%;
+
+        /*
+           Prevent accidental distortion.
+        */
+        min-width: 0;
+        min-height: 0;
+
+        transform: none;
+
+        filter: saturate(0.95);
+    }
+
+
+    /*
+       Rings stay behind card.
+    */
+
     .ring-one {
-        width: min(390px, 95vw);
+        width: min(420px, 100vw);
+
+        aspect-ratio: 1;
+
+        z-index: 0;
     }
 
     .ring-two {
-        width: min(300px, 75vw);
+        width: min(325px, 80vw);
+
+        aspect-ratio: 1;
+
+        z-index: 0;
     }
+
+
+    /*
+       FLOATING BADGES
+    */
 
     .tech-badge {
         padding: 9px 11px;
 
         font-size: 9px;
+
+        z-index: 5;
+
+        white-space: nowrap;
     }
 
     .tech-badge strong {
@@ -1936,11 +2130,11 @@ footer {
     }
 
     .badge-react {
-        top: 13%;
+        top: 12%;
 
         left: max(
             0px,
-            calc(50% - 190px)
+            calc(50% - 195px)
         );
     }
 
@@ -1949,21 +2143,23 @@ footer {
 
         right: max(
             0px,
-            calc(50% - 190px)
+            calc(50% - 195px)
         );
     }
 
     .badge-db {
-        bottom: 13%;
+        bottom: 12%;
 
         left: max(
             0px,
-            calc(50% - 180px)
+            calc(50% - 185px)
         );
     }
 
 
-    /* MARQUEE */
+    /* =====================================================
+       MARQUEE
+    ===================================================== */
 
     .marquee-section {
         padding: 16px 0;
@@ -1978,7 +2174,9 @@ footer {
     }
 
 
-    /* SECTION HEADINGS */
+    /* =====================================================
+       SECTION HEADINGS
+    ===================================================== */
 
     .section-heading {
         margin-bottom: 40px;
@@ -2005,7 +2203,9 @@ footer {
     }
 
 
-    /* ABOUT */
+    /* =====================================================
+       ABOUT
+    ===================================================== */
 
     .about-grid {
         grid-template-columns: 1fr;
@@ -2048,7 +2248,9 @@ footer {
     }
 
 
-    /* SKILLS */
+    /* =====================================================
+       SKILLS
+    ===================================================== */
 
     .skills-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2081,7 +2283,9 @@ footer {
     }
 
 
-    /* PROJECTS */
+    /* =====================================================
+       PROJECTS
+    ===================================================== */
 
     .project-card {
         min-height: auto;
@@ -2148,7 +2352,9 @@ footer {
     }
 
 
-    /* EXPERIENCE */
+    /* =====================================================
+       EXPERIENCE
+    ===================================================== */
 
     .timeline-item {
         display: block;
@@ -2175,7 +2381,9 @@ footer {
     }
 
 
-    /* CONTACT */
+    /* =====================================================
+       CONTACT
+    ===================================================== */
 
     .contact-section {
         padding-bottom: 90px;
@@ -2231,7 +2439,9 @@ footer {
     }
 
 
-    /* FOOTER */
+    /* =====================================================
+       FOOTER
+    ===================================================== */
 
     .footer-container {
         width: calc(100% - 28px);
@@ -2256,7 +2466,6 @@ footer {
     .copyright {
         text-align: center !important;
     }
-
 }
 
 
@@ -2285,7 +2494,9 @@ footer {
     }
 
 
-    /* HERO */
+    /* =====================================================
+       HERO
+    ===================================================== */
 
     .hero {
         padding-top: 105px;
@@ -2326,253 +2537,4 @@ footer {
 
         align-items: center;
     }
-
-    .btn {
-        width: min(100%, 250px);
-    }
-
-    .hero-socials {
-        font-size: 10px;
-
-        gap: 9px;
-    }
-
-
-    /* IMAGE */
-
-    .hero-visual {
-        min-height: 380px;
-    }
-
-    .profile-card {
-        width: min(
-            250px,
-            68vw
-        );
-
-        border-radius: 18px;
-    }
-
-    .card-top {
-        height: 32px;
-
-        padding: 0 11px;
-    }
-
-    .card-top span {
-        width: 5px;
-        height: 5px;
-    }
-
-    .profile-bottom {
-        height: 38px;
-
-        padding: 0 12px;
-
-        font-size: 7px;
-
-        letter-spacing: 1px;
-    }
-
-    .tech-badge {
-        padding: 8px 9px;
-
-        gap: 6px;
-
-        border-radius: 9px;
-
-        font-size: 8px;
-    }
-
-    .tech-badge strong {
-        font-size: 9px;
-    }
-
-    .badge-react {
-        left: 0;
-    }
-
-    .badge-node {
-        right: 0;
-    }
-
-    .badge-db {
-        left: 0;
-    }
-
-
-    /* ABOUT */
-
-    .about-stats {
-        grid-template-columns: 1fr;
-
-        gap: 8px;
-    }
-
-    .stat {
-        padding: 15px;
-
-        text-align: left;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: space-between;
-    }
-
-    .stat strong {
-        font-size: 20px;
-    }
-
-    .stat span {
-        margin-top: 0;
-
-        font-size: 8px;
-    }
-
-
-    /* SKILLS */
-
-    .skills-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .skill-card {
-        min-height: auto;
-
-        padding: 20px;
-    }
-
-    .skill-card h3 {
-        margin-top: 25px;
-    }
-
-
-    /* PROJECTS */
-
-    .project-card {
-        padding: 20px;
-    }
-
-    .project-info h3 {
-        font-size: 29px;
-    }
-
-
-    /* EXPERIENCE */
-
-    .timeline-item {
-        padding-left: 25px;
-    }
-
-    .timeline::before {
-        left: 5px;
-    }
-
-    .timeline-dot {
-        left: -1px;
-
-        width: 13px;
-        height: 13px;
-    }
-
-
-    /* CONTACT */
-
-    .contact-box {
-        padding: 25px 16px;
-    }
-
-    .contact-left h2 {
-        font-size: 36px;
-    }
-
-    .contact-item {
-        padding: 12px;
-    }
-
-}
-
-
-/* =========================================================
-   VERY SMALL PHONES
-   360px and below
-========================================================= */
-
-@media (max-width: 360px) {
-
-    .section {
-        width: calc(100% - 20px);
-    }
-
-    .nav-container {
-        width: calc(100% - 20px);
-    }
-
-    .hero h1 {
-        font-size: 48px;
-    }
-
-    .hero-role {
-        font-size: 15px;
-    }
-
-    .hero-description {
-        font-size: 11px;
-    }
-
-    .profile-card {
-        width: 220px;
-    }
-
-    .hero-visual {
-        min-height: 340px;
-    }
-
-    .ring-one {
-        width: 300px;
-    }
-
-    .ring-two {
-        width: 245px;
-    }
-
-    .tech-badge {
-        transform: scale(0.9);
-    }
-
-    .section-heading h2 {
-        font-size: 32px;
-    }
-
-    .project-info h3 {
-        font-size: 26px;
-    }
-
-    .contact-left h2 {
-        font-size: 32px;
-    }
-
-}
-
-
-/* =========================================================
-   REDUCE MOTION
-========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    html {
-        scroll-behavior: auto;
-    }
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-
-}
+```
