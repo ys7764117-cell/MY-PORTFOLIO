@@ -2537,4 +2537,147 @@ footer {
 
         align-items: center;
     }
-```
+}
+/* =========================================
+   MOBILE 3D IMAGE FIX
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    /* Main visual section */
+    .hero-visual {
+        width: 100%;
+        height: auto;
+        min-height: 450px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: visible;
+        padding: 20px 10px;
+        box-sizing: border-box;
+    }
+
+    /* 3D Card */
+    .profile-card {
+        width: 90%;
+        max-width: 330px;
+        height: auto;
+        min-height: 430px;
+        margin: 0 auto;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    /* Image container */
+    .profile-image-wrapper {
+        width: 100%;
+        height: auto;
+        min-height: 330px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    /* 3D Image */
+    .profile-image {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    /* Floating React / Node / MongoDB badges */
+    .tech-badge {
+        z-index: 20;
+        transform: scale(0.85);
+    }
+
+    .badge-react {
+        left: 0;
+    }
+
+    .badge-node {
+        right: 0;
+    }
+
+    .badge-db {
+        left: 0;
+    }
+
+    /* Decorative rings */
+    .ring-one {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .ring-two {
+        width: 80%;
+        max-width: 320px;
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+   ========================================= */
+
+@media (max-width: 480px) {
+
+    .hero-visual {
+        min-height: 420px;
+        padding: 15px 5px 30px;
+    }
+
+    .profile-card {
+        width: 88vw;
+        max-width: 310px;
+        min-height: 400px;
+        border-radius: 20px;
+    }
+
+    .profile-image-wrapper {
+        min-height: 300px;
+    }
+
+    .profile-image {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .tech-badge {
+        transform: scale(0.75);
+    }
+}
+
+
+/* =========================================
+   VERY SMALL PHONES
+   ========================================= */
+
+@media (max-width: 360px) {
+
+    .hero-visual {
+        min-height: 390px;
+    }
+
+    .profile-card {
+        width: 90vw;
+        max-width: 290px;
+        min-height: 370px;
+    }
+
+    .profile-image-wrapper {
+        min-height: 280px;
+    }
+
+    .profile-image {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+}
