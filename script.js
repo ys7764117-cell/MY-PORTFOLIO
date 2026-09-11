@@ -240,7 +240,7 @@ window.addEventListener("scroll", () => {
 ========================================================= */
 
 const resumeLink = document.querySelector(
-    'a[href="assets/Yaser-Sayed-Resume.pdf"]'
+    'a[href="Yaser_Sayed_Full_Stack_Developer_Resume - Copy.pdf"]'
 );
 
 if (resumeLink) {
